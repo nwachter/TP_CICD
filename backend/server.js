@@ -2,10 +2,10 @@ const express = require('express');
 require('dotenv').config({ path: '.env' });
 
 const app = express();
-const port = 4000;
+const port = 4002;
 
 const URI = process.env.MONGODB_URI;
-const PORT = Number(process.env.PORT || 4000);
+const PORT = Number(process.env.PORT || 4002);
 const NODE_ENV = process.env.NODE_ENV || 'production';
 
 const hostname = NODE_ENV === 'development' ? 'localhost' : '0.0.0.0';
