@@ -10,27 +10,32 @@ services:
       - "4000:4000" 
     expose:
       - 4000
-    environment:
-      - NODE_ENV=production
-      - PORT=4000
+ #   environment:
+ #    - NODE_ENV=production
+  #    - PORT=4000
     volumes:
-      - ./server:/usr/src/app
+   #   - ./cicd_server:/usr/src/app
+    - ./backend:/usr/src/app
+
       - /usr/src/app/node_modules
     restart: unless-stopped
 
   cicd_nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
+    image: nginx:alpine
+    #build:
+     # context: ./nginx
+      #dockerfile: Dockerfile
     container_name: cicd_nginx
     networks:
       - cicd-network
     ports:
       - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     expose:
       - 8080
-    environment:
-      - NODE_ENV=production
+ #   environment:
+ #     - NODE_ENV=production
     depends_on:
       - cicd_server
     restart: unless-stopped
