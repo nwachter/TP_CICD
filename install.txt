@@ -1,0 +1,7 @@
+Config vps secrets github - actions  :
+VPS_HOST
+VPS_USER
+VPS_SSH_KEy
+VPS_PATH
+
+dans dossier html de nginx in faut mettre la config nginx aussi

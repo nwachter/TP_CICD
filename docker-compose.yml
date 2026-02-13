@@ -1,0 +1,41 @@
+services:
+  cicd_server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cicd_server
+    networks:
+      - cicd-network
+    ports:
+      - "4000:4000" 
+    expose:
+      - 4000
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+
+  cicd_nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: cicd_nginx
+    networks:
+      - cicd-network
+    ports:
+      - "8080:80"
+    expose:
+      - 8080
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - cicd_server
+    restart: unless-stopped
+
+networks:
+  cicd-network:
+    name: cicd-network
+    external: true
