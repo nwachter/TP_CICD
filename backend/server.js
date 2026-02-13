@@ -18,6 +18,7 @@ app.get('/api/hello', (req, res) => {
   res.json({ message: "Hello World!" });
 });
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0',() => {
   console.log(`Serveur démarré sur http://localhost:${port}`);
 }); 
+
