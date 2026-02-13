@@ -4,21 +4,21 @@ require('dotenv').config({ path: '.env' });
 const app = express();
 const port = 4002;
 
-const URI = process.env.MONGODB_URI;
+//const URI = process.env.MONGODB_URI;
 const PORT = Number(process.env.PORT || 4002);
 const NODE_ENV = process.env.NODE_ENV || 'production';
 
 const hostname = NODE_ENV === 'development' ? 'localhost' : '0.0.0.0';
 
 //A enlever en prod
-const cors = require('cors');
-app.use(cors());
+//const cors = require('cors');
+//app.use(cors());
 
 app.get('/api/hello', (req, res) => {
   res.json({ message: "Hello World!" });
 });
 
-app.listen(port, '0.0.0.0',() => {
-  console.log(`Serveur démarré sur http://localhost:${port}`);
+app.listen(port, NODE_ENV === "production" ? '0.0.0.0' : 'localhost',() => {
+  console.log(`Serveur démarré sur http://${NODE_ENV === "production" ? '0.0.0.0' : 'localhost'}:${PORT}`);
 }); 
 
